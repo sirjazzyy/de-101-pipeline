@@ -7,6 +7,8 @@ plt.bar(df['site'], df['total_deliveries'])
 plt.title("Deliveries per Construction Site - Day 2")
 plt.xlabel("Site")
 plt.ylabel("Number of Deliveries")
+plt.xticks(rotation=0)
+plt.tight_layout()
 plt.savefig("data/deliveries_per_site.png")
 print("Saved: deliveries_per_site.png")
 
