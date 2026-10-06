@@ -1,24 +1,54 @@
-# de-101-pipeline
-My first Data Engineering pipeline - Zero to Hero journey.
-## 📊 Day 2 - Visualizations
-![Deliveries per Site](data/deliveries_per_site.png)
-![Total Quantity per Site](data/quantity_per_site.png)
+# DE-101: Materials Data Pipeline 🏗️
 
-- Site A: 3 deliveries, 500 units
-- Site B: 1 delivery, ~350 units
-## What it does
-- Ingest raw CSV data
-- Clean & transform with Python (Pandas)
-- Save processed data ready for analysis
+A production-style ETL pipeline for processing construction materials data (Cement, Reinforcement Bars, Sand) - built with Python, Pandas & Logging.
 
-## Tech Stack
-- Python, Pandas, Git, GitHub
+> Day 1-5 Project by Jazzy | Aspiring Data Engineer
 
-## How to run
-pip install -r requirements.txt
-python scripts/extract_clean.py
-## How to Run the Full Pipeline
-```bash
-python scripts/pipeline.py
-## Author
-Jazzy - Aspiring Data Engineer
+### 📊 Architecture
+Raw CSV -> Extract & Clean -> Cleaned CSV -> Visualize -> Logs
+
+### 📁 Folder Structure
+de-101-pipeline/
+├── data/
+│   ├── raw/materials.csv
+│   └── processed/cleaned.csv
+├── logs/
+│   └── pipeline.log
+├── extract_clean.py
+├── visualize_materials.py
+├── pipeline.py
+└── README.md
+
+### 🛠️ Tech Stack
+- Python 3
+- Pandas for ETL
+- Matplotlib for charts
+- Logging for monitoring
+- Git & GitHub
+
+### 🚀 How to Run
+git clone https://github.com/sirjazzyy/de-101-pipeline.git
+cd de-101-pipeline
+pip install pandas matplotlib
+python3 pipeline.py
+
+### 📝 Sample Log
+2026-10-06 - INFO - Starting extract_clean.py...
+2026-10-06 - INFO - Completed successfully!
+2026-10-06 - INFO - PIPELINE COMPLETE in 0:00:05
+
+### 📈 What it Does
+- Cleans missing values (NaN -> 0)
+- Processes real factory materials
+- Generates delivery charts
+- Full audit trail via logs
+
+### 🗓️ Roadmap
+- Day 1: Basic ETL
+- Day 2: Visualizations
+- Day 3: Pipeline Automation
+- Day 4: Pro Logging + Real Data
+- Day 5: Professional README (TODAY)
+
+---
+Author: sirjazzyy | Data Engineer in progress
