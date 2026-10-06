@@ -17,6 +17,8 @@ My first Data Engineering pipeline - Zero to Hero journey.
 ## How to run
 pip install -r requirements.txt
 python scripts/extract_clean.py
-
+## How to Run the Full Pipeline
+```bash
+python scripts/pipeline.py
 ## Author
 Jazzy - Aspiring Data Engineer
