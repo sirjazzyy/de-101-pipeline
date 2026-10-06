@@ -1,0 +1,7 @@
+name,age,email,grade,score
+Jazzy,23,jazzy@test.com,A,85
+Ali,,ali@test.com,B,78
+Sara,22,sara@test.com,A,92
+John,24,john@test.com,,88
+Bola,21,bola@test.com,C,65
+Tunde,23,,B,79
