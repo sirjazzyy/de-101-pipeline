@@ -51,6 +51,9 @@ python3 pipeline.py
 - Day 5: Professional README
 - Day 6-7: Multi-Dataset + Logging
 - Day 8: Parameterized ETL (TODAY)
+## 📊 Results - Materials Analysis
+![Deliveries per Site](data/processed/deliveries_per_site.png)
+![Quantity per Site](data/processed/quantity_per_site.png)
 
 ### Day 6-7 - Multi-Dataset
 - Added 3 real datasets: students, real_tips, ecommerce
