@@ -48,7 +48,23 @@ python3 pipeline.py
 - Day 2: Visualizations
 - Day 3: Pipeline Automation
 - Day 4: Pro Logging + Real Data
-- Day 5: Professional README (TODAY)
+- Day 5: Professional README
+- Day 6-7: Multi-Dataset + Logging
+- Day 8: Parameterized ETL (TODAY)
 
+### Day 6-7 - Multi-Dataset
+- Added 3 real datasets: students, real_tips, ecommerce
+- Added full audit trail via logs/pipeline.log
+
+### Day 8 - Parameterized ETL (Current)
+- Fixed critical bug: hardcoded `clean_ecommerce.csv` → now uses args
+- Added argparse for --input / --output (pipeline reusable for any CSV)
+- Outputs: clean_students.csv (3 rows), clean_real_tips.csv (244 rows), clean_ecommerce.csv (500 rows)
+
+#### How to Run Day 8
+```bash
+python scripts/run_pipeline.py --input data/raw/students.csv --output data/processed/clean_students.csv
+python scripts/run_pipeline.py --input data/raw/real_tips.csv --output data/processed/clean_real_tips.csv
+python scripts/run_pipeline.py --input data/raw/ecommerce.csv --output data/processed/clean_ecommerce.csv
 ---
 Author: sirjazzyy | Data Engineer in progress
