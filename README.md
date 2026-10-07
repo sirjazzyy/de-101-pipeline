@@ -66,5 +66,5 @@ python3 pipeline.py
 python scripts/run_pipeline.py --input data/raw/students.csv --output data/processed/clean_students.csv
 python scripts/run_pipeline.py --input data/raw/real_tips.csv --output data/processed/clean_real_tips.csv
 python scripts/run_pipeline.py --input data/raw/ecommerce.csv --output data/processed/clean_ecommerce.csv
----
-Author: sirjazzyy | Data Engineer in progress
+'''
+'Author: sirjazzyy | Data Engineer in progress'
