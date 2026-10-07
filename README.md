@@ -2,7 +2,7 @@
 
 A production-style ETL pipeline for processing construction materials data (Cement, Reinforcement Bars, Sand) - built with Python, Pandas & Logging.
 
-> Day 1-5 Project by Jazzy | Aspiring Data Engineer
+> Day 1-8 Project by Jazzy | Aspiring Data Engineer
 
 ### 📊 Architecture
 Raw CSV -> Extract & Clean -> Cleaned CSV -> Visualize -> Logs
