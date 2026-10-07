@@ -68,4 +68,4 @@ python scripts/run_pipeline.py --input data/raw/real_tips.csv --output data/proc
 python scripts/run_pipeline.py --input data/raw/ecommerce.csv --output data/processed/clean_ecommerce.csv
 ```
 
-'Author: sirjazzyy | Data Engineer in progress'
+Author: sirjazzyy | Data Engineer in progress
