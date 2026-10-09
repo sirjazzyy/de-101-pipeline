@@ -1,13 +1,21 @@
 import subprocess
 import logging
+import os
 from datetime import datetime
 import sys
 
-# Setup logging - real pipelines use this
+# Setup logging - file + console
+os.makedirs("logs", exist_ok=True)
+log_file = f"logs/pipeline_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S'
+    format='%(asctime)s | %(levelname)-8s | %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',
+    handlers=[
+        logging.FileHandler(log_file),
+        logging.StreamHandler(sys.stdout)
+    ]
 )
 
 def run_step(script_name):
@@ -33,4 +41,4 @@ if __name__ == "__main__":
         sys.exit(1)
 
     end = datetime.now()
-    logging.info(f"===== PIPELINE COMPLETE in {end - start} =====")
+    logging.info(f"===== PIPELINE COMPLETE in {end - start} | Logs saved to {log_file} =====")
