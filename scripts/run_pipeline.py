@@ -1,67 +1,53 @@
 import pandas as pd
-import os
 import argparse
-import logging
-from datetime import datetime
 import sys
+import os
 
-# Setup proper logger
-os.makedirs("logs", exist_ok=True)
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s | %(levelname)-8s | %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S',
-    handlers=[
-        logging.FileHandler(f"logs/etl_{datetime.now().strftime('%Y%m%d')}.log"),
-        logging.StreamHandler(sys.stdout)
-    ]
-)
-logger = logging.getLogger(__name__)
+# Make sure we can import from scripts folder
+sys.path.append(os.path.dirname(__file__))
 
-def extract(input_path):
-    logger.info(f"[1/3] Extracting {input_path}...")
-    try:
-        df = pd.read_csv(input_path)
-        logger.info(f"Extracted {len(df)} rows from {input_path}")
-        return df
-    except FileNotFoundError:
-        logger.error(f"Input file not found: {input_path}")
-        raise
+from logger import get_logger
+from validate import validate_data
 
-def clean(df):
-    logger.info("[2/3] Cleaning...")
-    initial = len(df)
-    nulls_before = df.isnull().sum().sum()
-    logger.info(f"Found {nulls_before} null values")
-    
-    df = df.dropna()
-    df.columns = [c.strip().lower().replace(" ", "_").replace(".", "") for c in df.columns]
-    
-    logger.info(f"Cleaned: {initial} -> {len(df)} rows (dropped {initial - len(df)})")
-    return df
+logger = get_logger("etl_pipeline")
 
-def load(df, output_path):
-    logger.info(f"[3/3] Loading to {output_path}...")
-    os.makedirs("data/processed", exist_ok=True)
-    df.to_csv(output_path, index=False)
-    logger.info(f"Successfully saved {len(df)} rows to {output_path}")
-
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description="DE-101 ETL Pipeline")
-    parser.add_argument("--input", required=True, help="Input CSV path")
-    parser.add_argument("--output", required=False, help="Output CSV path")
+    parser.add_argument('--input', required=True, help='Input CSV file')
     args = parser.parse_args()
 
-    if not args.output:
-        base = os.path.basename(args.input)
-        args.output = f"data/processed/clean_{base}"
-
-    logger.info("===== ETL JOB STARTED =====")
     try:
-        df = extract(args.input)
-        df = clean(df)
-        load(df, args.output)
+        logger.info("===== ETL JOB STARTED =====")
+        logger.info(f"Input file: {args.input}")
+
+        # [1/4] EXTRACT
+        logger.info(f"[1/4] Extracting {args.input}...")
+        df = pd.read_csv(args.input)
+        logger.info(f"Extracted {len(df)} rows")
+
+        # [2/4] VALIDATE (Day 10 - NEW)
+        logger.info(f"[2/4] Validating data...")
+        df = validate_data(df)
+
+        # [3/4] CLEAN
+        logger.info(f"[3/4] Cleaning...")
+        nulls = df.isnull().sum().sum()
+        logger.info(f"Found {nulls} null values")
+        # Your existing cleaning logic here
+        # df = df.dropna() etc.
+
+        # [4/4] LOAD
+        logger.info(f"[4/4] Loading...")
+        # Your existing load logic here
+        # For now, just save to processed
+        os.makedirs("data/processed", exist_ok=True)
+        df.to_csv("data/processed/cleaned_data.csv", index=False)
+        
         logger.info("===== ETL JOB COMPLETED SUCCESSFULLY =====")
+
     except Exception as e:
-        logger.error(f"ETL JOB FAILED: {e}", exc_info=True)
-        sys.exit(1)
+        logger.error(f"===== ETL JOB FAILED: {e} =====")
+        raise
+
+if __name__ == "__main__":
+    main()
